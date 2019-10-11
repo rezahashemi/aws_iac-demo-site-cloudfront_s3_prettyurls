@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "AutomateTheCloud - Site - automatethe.cloud (prd) - us-east-1"
+Description: "AutomateTheCloud - Site - Demo - CloudFront S3 Pretty URLs (prd) - us-east-1"
 ##-------------------------------------------------------------------------------------------------
 Parameters:
   ##---------------------------------------------------------------------------------------

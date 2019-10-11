@@ -16,7 +16,7 @@
   { "ParameterKey": "CloudFrontSSLMinimumProtocolVersion", "ParameterValue": "TLSv1.2_2018" },
   { "ParameterKey": "DNSWebsite", "ParameterValue": "demo-cloudfront-s3-prettyurls|automatethe.cloud|Z2WEWYG23GZUKP" },
   { "ParameterKey": "Function", "ParameterValue": "Site - Demo - CloudFront S3 Pretty URLs|site-demo-cfs3prettyurls" },
-  { "ParameterKey": "LastUpdate", "ParameterValue": "2019-10-10 20:12:47.958 UTC" },
+  { "ParameterKey": "LastUpdate", "ParameterValue": "2019-10-11 01:16:52.025 UTC" },
   { "ParameterKey": "Organization", "ParameterValue": "Shared Services|share|us-east-1|prd" },
   { "ParameterKey": "Owner", "ParameterValue": "David Singer|aws-ops@automatethe.cloud" },
   { "ParameterKey": "Project", "ParameterValue": "AutomateTheCloud|atc" },

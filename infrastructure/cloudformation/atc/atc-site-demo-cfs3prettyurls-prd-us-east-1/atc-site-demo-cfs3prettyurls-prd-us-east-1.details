@@ -1,5 +1,5 @@
 [stack_name]=atc-site-demo-cfs3prettyurls-prd-us-east-1
-[stack_description]=AutomateTheCloud - Site - automatethe.cloud (prd) - us-east-1
+[stack_description]=AutomateTheCloud - Site - Demo - CloudFront S3 Pretty URLs (prd) - us-east-1
 [deployment_timeout]=120
 [account_name]=AutomateTheCloud
 [account_abbr]=atc
