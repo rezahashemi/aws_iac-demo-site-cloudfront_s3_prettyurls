@@ -1,0 +1,106 @@
+##-------------------------------------------------------------------------------------------------
+# purpose: AWS IaC - Site - Demo - CloudFront / S3 / Pretty URLs (Application)
+##-------------------------------------------------------------------------------------------------
+name: $(Date:yyyy.MM.dd)$(Rev:.r)
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - /application
+
+##-------------------------------------------------------------------------------------------------
+variables:
+  - name: build.subdirectory
+    value: 'application'
+
+  - name: artifact.id
+    value: 'site-cloudfront_s3_prettyurls'
+  - name: artifact.version
+    value: $(Build.BuildNumber)
+
+  - name: JEKYLL_ENV
+    value: production
+  - name: init.azure_devops
+    value: yes
+
+##-------------------------------------------------------------------------------------------------
+jobs:
+
+##---------------------------------------------------------------------------------------
+- job: build
+  displayName: 'Build'
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  workspace:
+    clean: all
+
+  steps:
+  ##-----------------------------------------------------------------------------
+  # Setup
+  - script: |
+      CID_URL_LATEST="$(curl -s https://api.github.com/repos/AutomateTheCloud/atc-cid/releases/latest | grep "browser_download_url.*tgz" | cut -d : -f 2,3 | tr -d \" | awk '{$1=$1};1')"
+      sudo mkdir -p /opt/cid
+      curl -L ${CID_URL_LATEST} | sudo tar zxf - -C /opt/cid
+      sudo bash /opt/cid/scripts/utility/install.sh -d /usr/local/sbin/
+    displayName: 'Setup - Install CID'
+    name: setup_install
+
+  - script: |
+      cid.initialize_workspace
+    displayName: 'Setup - Initialize Workspace'
+    name: setup_initialize
+
+  - task: UseRubyVersion@0
+    displayName: 'Setup - Install Ruby'
+    inputs:
+      versionSpec: '>= 2.4'
+      addToPath: true
+
+  - script: gem install bundle
+    displayName: 'Setup - Install Bundle Gem'
+
+  ##-----------------------------------------------------------------------------
+  # Build
+  - script: if [ -f "$(workspace.directory.repository)/$(build.subdirectory)/source/Gemfile" ]; then $(which bundle) install --gemfile "$(workspace.directory.repository)/$(build.subdirectory)/source/Gemfile"; fi
+    displayName: 'Build - Gem Install'
+    workingDirectory: $(workspace.directory.repository)/$(build.subdirectory)/source
+
+  ##-----------------------------------------------------------------------------
+  # Build
+  - script: $(which jekyll) build -s "$(workspace.directory.repository)/$(build.subdirectory)/source/" -d "$(workspace.directory.package)/site/"
+    displayName: 'Build - Jekyll Build'
+    workingDirectory: $(workspace.directory.repository)/$(build.subdirectory)/source
+
+  ##-----------------------------------------------------------------------------
+  # Package
+  - script: mkdir -p $(workspace.directory.package)/support
+    displayName: 'Package - Generate Directories'
+
+  - script: rsync -r --exclude='.git/' $(workspace.directory.repository)/$(build.subdirectory)/support/ $(workspace.directory.package)/support/
+    displayName: 'Package - Copy Support files to Package Directory'
+
+  - script: echo "version=$(artifact.version)" > $(workspace.directory.package)/site/version.info
+    displayName: 'Package - Generate Version Info file'
+
+  - task: ArchiveFiles@2
+    displayName: Package - Generate Package Tarball
+    inputs:
+      rootFolderOrFile: $(workspace.directory.package)
+      includeRootFolder: false
+      archiveType: 'tar'
+      tarCompression: 'gz'
+      archiveFile: '$(workspace.directory.artifacts)/$(artifact.id)-$(artifact.version).tgz'
+      replaceExistingArchive: true
+      verbose: true
+
+  ##-----------------------------------------------------------------------------
+  # Archive
+  - task: PublishBuildArtifacts@1
+    displayName: Archive - Publish Pipeline Build Artifacts
+    inputs:
+      pathtoPublish: '$(workspace.directory.artifacts)'
+      artifactName: 'build'

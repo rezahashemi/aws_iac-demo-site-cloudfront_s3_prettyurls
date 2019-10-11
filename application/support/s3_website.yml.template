@@ -1,0 +1,27 @@
+s3_bucket: ZZ_S3_BUCKET_ZZ
+cloudfront_distribution_id: ZZ_CLOUDFRONT_DISTRIBUTION_ID_ZZ
+site: ZZ_SITE_SOURCE_ZZ
+s3_reduced_redundancy: true
+cloudfront_wildcard_invalidation: true
+gzip: true
+gzip:
+  - .html
+  - .css
+  - .js
+  - .json
+  - .map
+  - .ico
+  - .txt
+  - .eot
+  - .otf
+  - .ttf
+  - .woff
+  - .csv
+  - .xlsx
+  - .svg
+  - .xml
+  - .xsd
+  - .rng
+cache_control:
+  "*.ico": public, no-transform, max-age=86400, s-maxage=86400
+  "*": public, no-transform, max-age=86400, s-maxage=86400

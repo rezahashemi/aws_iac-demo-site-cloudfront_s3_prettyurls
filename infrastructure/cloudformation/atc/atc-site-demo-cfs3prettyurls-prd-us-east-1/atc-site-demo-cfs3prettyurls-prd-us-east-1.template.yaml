@@ -1,0 +1,853 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "AutomateTheCloud - Site - automatethe.cloud (prd) - us-east-1"
+##-------------------------------------------------------------------------------------------------
+Parameters:
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError400
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError400:
+    Description: "CloudFront: Document - Error400"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError403
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError403:
+    Description: "CloudFront: Document - Error403"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError404
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError404:
+    Description: "CloudFront: Document - Error404"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError405
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError405:
+    Description: "CloudFront: Document - Error405"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError414
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError414:
+    Description: "CloudFront: Document - Error414"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError416
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError416:
+    Description: "CloudFront: Document - Error416"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError500
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError500:
+    Description: "CloudFront: Document - Error500"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError501
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError501:
+    Description: "CloudFront: Document - Error501"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError502
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError502:
+    Description: "CloudFront: Document - Error502"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError503
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError503:
+    Description: "CloudFront: Document - Error503"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentError504
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentError504:
+    Description: "CloudFront: Document - Error504"
+    Type: String
+    Default: "error.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontDocumentIndex
+  ##---------------------------------------------------------------------------------------
+  CloudFrontDocumentIndex:
+    Description: "CloudFront: Document - Index"
+    Type: String
+    Default: "index.html"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontPriceClass
+  ##---------------------------------------------------------------------------------------
+  CloudFrontPriceClass:
+    Description: "CloudFront: Price Class"
+    Type: String
+    Default: "PriceClass_100"
+    AllowedValues:
+      - "PriceClass_100"
+      - "PriceClass_200"
+      - "PriceClass_All"
+    ConstraintDescription: "PriceClass_100, PriceClass_200, PriceClass_All"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  CloudFront/CloudFrontSSLMinimumProtocolVersion
+  ##---------------------------------------------------------------------------------------
+  CloudFrontSSLMinimumProtocolVersion:
+    Description: "CloudFront: SSL - Minimum Protocol Version"
+    Type: String
+    Default: "TLSv1.1_2016"
+    AllowedValues:
+      - "SSLv3"
+      - "TLSv1"
+      - "TLSv1.1_2016"
+      - "TLSv1.2_2018"
+      - "TLSv1_2016"
+    ConstraintDescription: "SSLv3, TLSv1, TLSv1.1_2016, TLSv1.2_2018, TLSv1_2016"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/Account
+  ##---------------------------------------------------------------------------------------
+  Account:
+    Description: "Details: Account (AccountName | AccountAbbr | AccountNumber)"
+    Type: String
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/Function
+  ##---------------------------------------------------------------------------------------
+  Function:
+    Description: "Details: Function (FunctionName | FunctionAbbr)"
+    Type: String
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/LastUpdate
+  ##---------------------------------------------------------------------------------------
+  LastUpdate:
+    Description: "Details: Last Update"
+    Type: String
+    Default: 0
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/Organization
+  ##---------------------------------------------------------------------------------------
+  Organization:
+    Description: "Details: Organization (OrganizationName | OrganizationAbbr | region | environment)"
+    Type: String
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/Owner
+  ##---------------------------------------------------------------------------------------
+  Owner:
+    Description: "Details: Owner (Owner | Contact)"
+    Type: String
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/Project
+  ##---------------------------------------------------------------------------------------
+  Project:
+    Description: "Details: Project (ProjectName | ProjectAbbr)"
+    Type: String
+
+  ##---------------------------------------------------------------------------------------
+  # object:  DNS/DNSWebsite
+  ##---------------------------------------------------------------------------------------
+  DNSWebsite:
+    Description: "DNS: Website (Subdomain|Domain|HostedZoneID)"
+    Type: String
+
+  ##---------------------------------------------------------------------------------------
+  # object:  S3/S3NoncurrentVersionExpiration
+  ##---------------------------------------------------------------------------------------
+  S3NoncurrentVersionExpiration:
+    Description: "S3: Noncurrent Version Expiration (Days)"
+    Type: Number
+    Default: 3650
+
+  ##---------------------------------------------------------------------------------------
+  # object:  SSL/SSLCertACMCertificateArn
+  ##---------------------------------------------------------------------------------------
+  SSLCertACMCertificateArn:
+    Description: "SSL Cert: ACM Certificate ARN"
+    Type: String
+
+  ##---------------------------------------------------------------------------------------
+  # object:  SSL/SSLCertIAMCertificateId
+  ##---------------------------------------------------------------------------------------
+  SSLCertIAMCertificateId:
+    Description: "SSL Cert: IAM Certificate ID"
+    Type: String
+
+  ##---------------------------------------------------------------------------------------
+  # object: StackReference/StackReferenceInitialize
+  ##---------------------------------------------------------------------------------------
+  StackReferenceInitialize:
+    Description: "Stack Reference: Initialize"
+    Type: String
+
+  ##---------------------------------------------------------------------------------------
+  # object:  Website/WebsiteAlias1
+  ##---------------------------------------------------------------------------------------
+  WebsiteAlias1:
+    Description: "Website: Alias 1"
+    Type: "String"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  Website/WebsiteAlias2
+  ##---------------------------------------------------------------------------------------
+  WebsiteAlias2:
+    Description: "Website: Alias 2"
+    Type: "String"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  Website/WebsiteAlias3
+  ##---------------------------------------------------------------------------------------
+  WebsiteAlias3:
+    Description: "Website: Alias 3"
+    Type: "String"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  Website/WebsiteAlias4
+  ##---------------------------------------------------------------------------------------
+  WebsiteAlias4:
+    Description: "Website: Alias 4"
+    Type: "String"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  Website/WebsiteAlias5
+  ##---------------------------------------------------------------------------------------
+  WebsiteAlias5:
+    Description: "Website: Alias 5"
+    Type: "String"
+
+  ##---------------------------------------------------------------------------------------
+  # object:  Website/WebsiteAlias6
+  ##---------------------------------------------------------------------------------------
+  WebsiteAlias6:
+    Description: "Website: Alias 6"
+    Type: "String"
+
+##-------------------------------------------------------------------------------------------------
+Conditions:
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError400
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError400:
+    !Not [!Equals [!Ref "CloudFrontDocumentError400", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError403
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError403:
+    !Not [!Equals [!Ref "CloudFrontDocumentError403", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError404
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError404:
+    !Not [!Equals [!Ref "CloudFrontDocumentError404", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError405
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError405:
+    !Not [!Equals [!Ref "CloudFrontDocumentError405", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError414
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError414:
+    !Not [!Equals [!Ref "CloudFrontDocumentError414", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError416
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError416:
+    !Not [!Equals [!Ref "CloudFrontDocumentError416", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError500
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError500:
+    !Not [!Equals [!Ref "CloudFrontDocumentError500", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError501
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError501:
+    !Not [!Equals [!Ref "CloudFrontDocumentError501", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError502
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError502:
+    !Not [!Equals [!Ref "CloudFrontDocumentError502", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError503
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError503:
+    !Not [!Equals [!Ref "CloudFrontDocumentError503", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentError504
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentError504:
+    !Not [!Equals [!Ref "CloudFrontDocumentError504", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/ExistsCloudFrontDocumentIndex
+  ##---------------------------------------------------------------------------------------
+  ExistsCloudFrontDocumentIndex:
+    !Not [!Equals [!Ref "CloudFrontDocumentIndex", ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: DNS/ExistsDNSWebsite
+  ##---------------------------------------------------------------------------------------
+  ExistsDNSWebsite:
+    !Not [!Equals [!Select [0, !Split ["|", !Ref "DNSWebsite"]], ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: SSL/ExistsSSLCertACMCertificateArn
+  ##---------------------------------------------------------------------------------------
+  ExistsSSLCertACMCertificateArn:
+    !Not [!Equals [!Ref SSLCertACMCertificateArn, ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: SSL/ExistsSSLCertIAMCertificateId
+  ##---------------------------------------------------------------------------------------
+  ExistsSSLCertIAMCertificateId:
+    !Not [!Equals [!Ref SSLCertIAMCertificateId, ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: Website/ExistsWebsiteAlias1
+  ##---------------------------------------------------------------------------------------
+  ExistsWebsiteAlias1:
+    !Not [!Equals [!Ref WebsiteAlias1, ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: Website/ExistsWebsiteAlias2
+  ##---------------------------------------------------------------------------------------
+  ExistsWebsiteAlias2:
+    !Not [!Equals [!Ref WebsiteAlias2, ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: Website/ExistsWebsiteAlias3
+  ##---------------------------------------------------------------------------------------
+  ExistsWebsiteAlias3:
+    !Not [!Equals [!Ref WebsiteAlias3, ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: Website/ExistsWebsiteAlias4
+  ##---------------------------------------------------------------------------------------
+  ExistsWebsiteAlias4:
+    !Not [!Equals [!Ref WebsiteAlias4, ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: Website/ExistsWebsiteAlias5
+  ##---------------------------------------------------------------------------------------
+  ExistsWebsiteAlias5:
+    !Not [!Equals [!Ref WebsiteAlias5, ""]]
+
+  ##---------------------------------------------------------------------------------------
+  # object: Website/ExistsWebsiteAlias6
+  ##---------------------------------------------------------------------------------------
+  ExistsWebsiteAlias6:
+    !Not [!Equals [!Ref WebsiteAlias6, ""]]
+
+##-------------------------------------------------------------------------------------------------
+Resources:
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/CloudFrontOriginAccessIdentity/Website_S3
+  ##---------------------------------------------------------------------------------------
+  CloudFrontOriginAccessIdentityWebsite:
+    Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Ref "S3BucketWebsite"
+
+  ##---------------------------------------------------------------------------------------
+  # object: CloudFront/Distribution/Website_S3_PrettyURLs
+  ##---------------------------------------------------------------------------------------
+  DistributionWebsite:
+    Type: "AWS::CloudFront::Distribution"
+    Properties:
+      DistributionConfig:
+        Comment: !Join [ "", [ "S3 Website with Pretty URLs (", !Ref "S3BucketWebsite", ")" ] ]
+        Aliases:
+        - !If
+            - ExistsWebsiteAlias1
+            - !Ref "WebsiteAlias1"
+            - !Ref "AWS::NoValue"
+        - !If
+            - ExistsWebsiteAlias2
+            - !Ref "WebsiteAlias2"
+            - !Ref "AWS::NoValue"
+        - !If
+            - ExistsWebsiteAlias3
+            - !Ref "WebsiteAlias3"
+            - !Ref "AWS::NoValue"
+        - !If
+            - ExistsWebsiteAlias4
+            - !Ref "WebsiteAlias4"
+            - !Ref "AWS::NoValue"
+        - !If
+            - ExistsWebsiteAlias5
+            - !Ref "WebsiteAlias5"
+            - !Ref "AWS::NoValue"
+        - !If
+            - ExistsWebsiteAlias6
+            - !Ref "WebsiteAlias6"
+            - !Ref "AWS::NoValue"
+        Enabled: "true"
+        PriceClass: !Ref "CloudFrontPriceClass"
+        ViewerCertificate:
+          AcmCertificateArn: !If [ExistsSSLCertACMCertificateArn, !Ref "SSLCertACMCertificateArn", !Ref "AWS::NoValue"]
+          ServerCertificateId: !If [ExistsSSLCertIAMCertificateId, !Ref "SSLCertIAMCertificateId", !Ref "AWS::NoValue"]
+          SslSupportMethod: "sni-only"
+          MinimumProtocolVersion: !Ref "CloudFrontSSLMinimumProtocolVersion"
+        HttpVersion: "http2"
+        DefaultCacheBehavior:
+          AllowedMethods:
+          - GET
+          - HEAD
+          Compress: "true"
+          ForwardedValues:
+            QueryString: "true"
+            Cookies:
+              Forward: "all"
+            Headers:
+              - "Access-Control-Request-Headers"
+              - "Access-Control-Request-Method"
+              - "Origin"
+          TargetOriginId: !Join [ "_", [ "s3", !Ref "S3BucketWebsite" ] ]
+          ViewerProtocolPolicy: redirect-to-https
+          LambdaFunctionAssociations:
+            - EventType: "origin-request"
+              LambdaFunctionARN: !Ref "LambdaVersionCloudFrontPrettyURLs"
+        Logging:
+          IncludeCookies: "true"
+          Bucket: !Join [ "", [ !GetAtt "StackReferenceResultsInitialize.S3BucketLogs", ".s3.amazonaws.com" ] ]
+          Prefix: !Join [ "", [ "cloudfront/", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "/" ] ]
+        DefaultRootObject: !If [ExistsCloudFrontDocumentIndex, !Ref "CloudFrontDocumentIndex", !Ref "AWS::NoValue"]
+        CustomErrorResponses:
+          - !If
+            - "ExistsCloudFrontDocumentError400"
+            - ErrorCode: "400"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError400" ] ]
+              ResponseCode: "400"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+          - !If
+            - "ExistsCloudFrontDocumentError403"
+            - ErrorCode: "403"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError403" ] ]
+              ResponseCode: "403"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+          - !If
+            - "ExistsCloudFrontDocumentError404"
+            - ErrorCode: "404"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError404" ] ]
+              ResponseCode: "404"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+          - !If
+            - "ExistsCloudFrontDocumentError405"
+            - ErrorCode: "405"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError405" ] ]
+              ResponseCode: "405"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+          - !If
+            - "ExistsCloudFrontDocumentError414"
+            - ErrorCode: "414"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError414" ] ]
+              ResponseCode: "414"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+          - !If
+            - "ExistsCloudFrontDocumentError416"
+            - ErrorCode: "416"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError416" ] ]
+              ResponseCode: "416"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+          - !If
+            - "ExistsCloudFrontDocumentError500"
+            - ErrorCode: "500"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError500" ] ]
+              ResponseCode: "500"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+          - !If
+            - "ExistsCloudFrontDocumentError501"
+            - ErrorCode: "501"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError501" ] ]
+              ResponseCode: "501"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+          - !If
+            - "ExistsCloudFrontDocumentError502"
+            - ErrorCode: "502"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError502" ] ]
+              ResponseCode: "502"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+          - !If
+            - "ExistsCloudFrontDocumentError503"
+            - ErrorCode: "503"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError503" ] ]
+              ResponseCode: "503"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+          - !If
+            - "ExistsCloudFrontDocumentError504"
+            - ErrorCode: "504"
+              ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError504" ] ]
+              ResponseCode: "504"
+              ErrorCachingMinTTL: "30"
+            - !Ref "AWS::NoValue"
+        Origins:
+        - S3OriginConfig:
+            OriginAccessIdentity: !Join [ "", [ "origin-access-identity/cloudfront/", !Ref "CloudFrontOriginAccessIdentityWebsite", ] ]
+          DomainName: !GetAtt "S3BucketWebsite.DomainName"
+          Id: !Join [ "_", [ "s3", !Ref "S3BucketWebsite" ] ]
+      Tags:
+        - Key: "Organization"
+          Value: !Select [0, !Split ["|", !Ref "Organization"]]
+        - Key: "Project"
+          Value: !Select [0, !Split ["|", !Ref "Project"]]
+        - Key: "Function"
+          Value: !Select [0, !Split ["|", !Ref "Function"]]
+        - Key: "Environment"
+          Value: !Select [3, !Split ["|", !Ref "Organization"]]
+        - Key: "Owner"
+          Value: !Select [0, !Split ["|", !Ref "Owner"]]
+        - Key: "Contact"
+          Value: !Select [1, !Split ["|", !Ref "Owner"]]
+    DependsOn:
+      - "S3BucketWebsite"
+      - "LambdaVersionCloudFrontPrettyURLs"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Custom/StackReferenceResultsInitialize
+  ##---------------------------------------------------------------------------------------
+  StackReferenceResultsInitialize:
+    Type: "Custom::StackReferenceResultsInitialize"
+    Version: "1.0"
+    Properties:
+      "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+      "Region": !Ref "AWS::Region"
+      "StackName": !Ref "StackReferenceInitialize"
+      "LastUpdate": !Ref "LastUpdate"
+
+  ##---------------------------------------------------------------------------------------
+  # object: IAM/Role/LambdaFunctionCloudFrontPrettyURLs
+  ##---------------------------------------------------------------------------------------
+  IAMRoleLambdaFunctionCloudFrontPrettyURLs:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: !Join [ "", [ "lambda", "_", "cfpretty", "-", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region" ] ]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "edgelambda.amazonaws.com"
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Lambda/Function/CloudFrontPrettyURLs
+  ##---------------------------------------------------------------------------------------
+  LambdaFunctionCloudFrontPrettyURLs:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      FunctionName: !Join [ "-", [ "cfpretty", !Select [1, !Split ["|", !Ref "Project"]], !Select [1, !Split ["|", !Ref "Function"]], !Select [3, !Split ["|", !Ref "Organization"]] ] ]
+      Description: !Join [ "", [ "CloudFront PrettyURLs: ", !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " (", !Select [3, !Split ["|", !Ref "Organization"]], ")" ] ]
+      Handler: "index.handler"
+      Code:
+        ZipFile:
+          !Sub |
+            const config = {
+              suffix: '.html',
+              appendToDirs: 'index.html',
+            };
+            const regexSuffixless = /\/[^/.]+$/; // e.g. "/some/page" but not "/", "/some/" or "/some.jpg"
+            const regexTrailingSlash = /.+\/$/; // e.g. "/some/" or "/some/page/" but not root "/"
+            exports.handler = function handler(event, context, callback) {
+              const { request } = event.Records[0].cf;
+              const { uri } = request;
+              const { suffix, appendToDirs } = config;
+              // Append ".html" to origin request
+              if (suffix && uri.match(regexSuffixless)) {
+                request.uri = uri + suffix;
+                callback(null, request);
+                return;
+              }
+              // Append "index.html" to origin request
+              if (appendToDirs && uri.match(regexTrailingSlash)) {
+                request.uri = uri + appendToDirs;
+                callback(null, request);
+                return;
+              }
+              // If nothing matches, return request unchanged
+              callback(null, request);
+            };
+      Role: !GetAtt "IAMRoleLambdaFunctionCloudFrontPrettyURLs.Arn"
+      Runtime: "nodejs8.10"
+      MemorySize: "128"
+      Timeout: "5"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Lambda/Version/CloudFrontPrettyURLs
+  ##---------------------------------------------------------------------------------------
+  LambdaVersionCloudFrontPrettyURLs:
+    Type: "AWS::Lambda::Version"
+    Properties:
+      FunctionName: !Ref "LambdaFunctionCloudFrontPrettyURLs"
+      Description: "CloudFormation Pretty URL Lambda Function"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Logs/LogGroup/LambdaFunctionCloudFrontPrettyURLs
+  ##---------------------------------------------------------------------------------------
+  LogGroupLambdaFunctionCloudFrontPrettyURLs:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${LambdaFunctionCloudFrontPrettyURLs}"
+      RetentionInDays: 3
+  LogGroupLambdaFunctionEdgeCloudFrontPrettyURLs:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::Region}.${LambdaFunctionCloudFrontPrettyURLs}"
+      RetentionInDays: 3
+
+  ##---------------------------------------------------------------------------------------
+  # object: Route53/RecordSetGroup/DNSWebsite
+  ##---------------------------------------------------------------------------------------
+  RecordSetGroupDNSWebsite:
+    Condition: "ExistsDNSWebsite"
+    Type: "AWS::Route53::RecordSetGroup"
+    Properties:
+      HostedZoneId: !Select [2, !Split ["|", !Ref "DNSWebsite"]]
+      RecordSets:
+      - Name: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSWebsite"]], ".", !Select [1, !Split ["|", !Ref "DNSWebsite"]] ] ]
+        Type: "CNAME"
+        TTL: "300"
+        ResourceRecords:
+          - !GetAtt "DistributionWebsite.DomainName"
+
+  ##---------------------------------------------------------------------------------------
+  # object: S3/Bucket/Policy/Website_CloudFront
+  ##---------------------------------------------------------------------------------------
+  S3BucketPolicyWebsite:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket: !Ref "S3BucketWebsite"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Sid: "cloudfront_read"
+            Effect: "Allow"
+            Principal:
+                CanonicalUser: !GetAtt "CloudFrontOriginAccessIdentityWebsite.S3CanonicalUserId"
+            Action:
+              - "s3:GetObject"
+            Resource:
+              - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketWebsite", "/*" ] ]
+    DependsOn:
+      - "S3BucketWebsite"
+
+  ##---------------------------------------------------------------------------------------
+  # object: S3/Bucket/Website_CloudFront
+  ##---------------------------------------------------------------------------------------
+  S3BucketWebsite:
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: "Retain"
+    Properties:
+      BucketName: !Join [ "", [ "website", "-", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-", !Ref "AWS::AccountId" ] ]
+      BucketEncryption:
+          ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: "AES256"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      AccessControl: "Private"
+      LifecycleConfiguration:
+        Rules:
+        - Status: Enabled
+          NoncurrentVersionExpirationInDays: !Ref "S3NoncurrentVersionExpiration"
+      CorsConfiguration:
+        CorsRules:
+        - AllowedHeaders: ['*']
+          AllowedMethods: [GET, POST, HEAD]
+          AllowedOrigins: ['*']
+          MaxAge: "3600"
+      VersioningConfiguration:
+        Status: "Enabled"
+      LoggingConfiguration:
+        DestinationBucketName: !GetAtt "StackReferenceResultsInitialize.S3BucketLogs"
+        LogFilePrefix: !Join [ "", [ "s3/", "website", "-", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-", !Ref "AWS::AccountId", "/" ] ]
+      Tags:
+        - Key: "Name"
+          Value: !Join [ "", [ "website", "-", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-", !Ref "AWS::AccountId" ] ]
+
+##-------------------------------------------------------------------------------------------------
+Outputs:
+  ##---------------------------------------------------------------------------------------
+  # object: Details/Contact
+  ##---------------------------------------------------------------------------------------
+  Contact:
+    Description: "Details: Contact"
+    Value: !Select [1, !Split ["|", !Ref "Owner"]]
+    Export:
+      Name: !Sub "${AWS::StackName}-Contact"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/Environment
+  ##---------------------------------------------------------------------------------------
+  Environment:
+    Description: "Details: Environment"
+    Value: !Select [3, !Split ["|", !Ref "Organization"]]
+    Export:
+      Name: !Sub "${AWS::StackName}-Environment"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/FunctionAbbr
+  ##---------------------------------------------------------------------------------------
+  FunctionAbbr:
+    Description: "Details: FunctionAbbr"
+    Value: !Select [1, !Split ["|", !Ref "Function"]]
+    Export:
+      Name: !Sub "${AWS::StackName}-FunctionAbbr"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/FunctionName
+  ##---------------------------------------------------------------------------------------
+  FunctionName:
+    Description: "Details: FunctionName"
+    Value: !Select [0, !Split ["|", !Ref "Function"]]
+    Export:
+      Name: !Sub "${AWS::StackName}-FunctionName"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/LastUpdate
+  ##---------------------------------------------------------------------------------------
+  LastUpdate:
+    Description: "Details: LastUpdate"
+    Value: !Ref "LastUpdate"
+    Export:
+      Name: !Sub "${AWS::StackName}-LastUpdate"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/OrganizationAbbr
+  ##---------------------------------------------------------------------------------------
+  OrganizationAbbr:
+    Description: "Details: OrganizationAbbr"
+    Value: !Select [1, !Split ["|", !Ref "Organization"]]
+    Export:
+      Name: !Sub "${AWS::StackName}-OrganizationAbbr"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/OrganizationName
+  ##---------------------------------------------------------------------------------------
+  OrganizationName:
+    Description: "Details: OrganizationName"
+    Value: !Select [0, !Split ["|", !Ref "Organization"]]
+    Export:
+      Name: !Sub "${AWS::StackName}-OrganizationName"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/Owner
+  ##---------------------------------------------------------------------------------------
+  Owner:
+    Description: "Details: Owner"
+    Value: !Select [0, !Split ["|", !Ref "Owner"]]
+    Export:
+      Name: !Sub "${AWS::StackName}-Owner"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/ProjectAbbr
+  ##---------------------------------------------------------------------------------------
+  ProjectAbbr:
+    Description: "Details: ProjectAbbr"
+    Value: !Select [1, !Split ["|", !Ref "Project"]]
+    Export:
+      Name: !Sub "${AWS::StackName}-ProjectAbbr"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Details/ProjectName
+  ##---------------------------------------------------------------------------------------
+  ProjectName:
+    Description: "Details: ProjectName"
+    Value: !Select [0, !Split ["|", !Ref "Project"]]
+    Export:
+      Name: !Sub "${AWS::StackName}-ProjectName"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Distribution/DistributionWebsiteId
+  ##---------------------------------------------------------------------------------------
+  DistributionId:
+    Description: "CloudFront Distribution: Website"
+    Value: !Ref "DistributionWebsite"
+    Export:
+      Name: !Sub "${AWS::StackName}-DistributionId"
+
+  ##---------------------------------------------------------------------------------------
+  # object: Distribution/DistributionWebsiteURL
+  ##---------------------------------------------------------------------------------------
+  DistributionURL:
+    Description: "CloudFront Distribution: Website URL"
+    Value: !Join ['', [ "https://", !GetAtt "DistributionWebsite.DomainName" ] ]
+    Export:
+      Name: !Sub "${AWS::StackName}-DistributionURL"
+
+  ##---------------------------------------------------------------------------------------
+  # object: DNS/DNSWebsiteRecord
+  ##---------------------------------------------------------------------------------------
+  DNSWebsiteRecord:
+    Condition: "ExistsDNSWebsite"
+    Description: "DNS: Website Record"
+    Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSWebsite"]], ".", !Select [1, !Split ["|", !Ref "DNSWebsite"]] ] ]
+    Export:
+      Name: !Sub "${AWS::StackName}-DNSWebsiteRecord"
+
+  ##---------------------------------------------------------------------------------------
+  # object: S3/S3BucketWebsite
+  ##---------------------------------------------------------------------------------------
+  S3Bucket:
+    Description: "S3 Bucket: Website"
+    Value: !Ref "S3BucketWebsite"
+    Export:
+      Name: !Sub "${AWS::StackName}-S3Bucket"
+

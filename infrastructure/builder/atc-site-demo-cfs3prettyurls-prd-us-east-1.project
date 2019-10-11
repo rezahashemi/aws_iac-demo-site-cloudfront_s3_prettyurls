@@ -1,0 +1,59 @@
+Name:                                       atc-site-demo-cfs3prettyurls-prd-us-east-1
+Description:                                AutomateTheCloud - Site - automatethe.cloud (prd) - us-east-1
+Updated:                                    2019/10/10 16:15:00 EST
+
+Details:
+  Project:                                  AutomateTheCloud|atc
+  Function:                                 Site - Demo - CloudFront S3 Pretty URLs|site-demo-cfs3prettyurls
+  Organization:                             Shared Services|share|us-east-1|prd
+  Account:                                  AutomateTheCloud|atc|480685085376
+  Owner:                                    David Singer|aws-ops@automatethe.cloud
+  DeploymentTimeout:                        120
+
+##-------------------------------------------------------------------------------------------------
+Parameters:
+  #-- Stack Reference -------------------------------------------------------------------
+  StackReferenceInitialize:                 account-initialize-us-east-1
+
+  #-- SSL Certificate -------------------------------------------------------------------
+  SSLCertACMCertificateArn:                 arn:aws:acm:us-east-1:480685085376:certificate/5171b3be-94e2-444a-ac50-8064e73c71bb
+
+  #-- S3 --------------------------------------------------------------------------------
+  S3NoncurrentVersionExpiration:            2
+
+  #-- CloudFront ------------------------------------------------------------------------
+  CloudFrontPriceClass:                     PriceClass_100
+  CloudFrontSSLMinimumProtocolVersion:      TLSv1.2_2018
+  CloudFrontDocumentIndex:                  index.html
+  CloudFrontDocumentError400:               400.html
+  CloudFrontDocumentError403:               403.html
+  CloudFrontDocumentError404:               404.html
+  CloudFrontDocumentError405:               405.html
+  CloudFrontDocumentError414:               414.html
+  CloudFrontDocumentError416:               416.html
+  CloudFrontDocumentError500:               500.html
+  CloudFrontDocumentError501:               501.html
+  CloudFrontDocumentError502:               502.html
+  CloudFrontDocumentError503:               503.html
+  CloudFrontDocumentError504:               504.html
+
+  #-- Website Configuration -------------------------------------------------------------
+  WebsiteAlias1:                            demo-cloudfront-s3-prettyurls.automatethe.cloud
+  WebsiteAlias2:
+  WebsiteAlias3:
+  WebsiteAlias4:
+  WebsiteAlias5:
+  WebsiteAlias6:
+
+  #-- DNS -------------------------------------------------------------------------------
+  DNSWebsite:                               demo-cloudfront-s3-prettyurls|automatethe.cloud|Z2WEWYG23GZUKP
+
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Templates:
+    - Website/CloudFront_S3_PrettyURLs
+  Parameters:
+  Mappings:
+  Conditions:
+  Resources:
+  Outputs:

@@ -1,0 +1,31 @@
+name: AutomateTheCloud Demo
+description: "AWS Builder Example: Site - CloudFront / S3 / Pretty URLs"
+avatar: /images/logo.png
+
+footer-links:
+  email: demo@automatethe.cloud
+  github: AutomateTheCloud/aws_iac-demo-site-cloudfront_s3_prettyurls
+
+google_analytics: UA-149755223-1
+url: https://demo-cloudfront-s3-prettyurls.automatethe.cloud
+baseurl: ""
+
+permalink: /:title
+version: v1.2.0
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+sass:
+  style: :expanded # :expanded / :compressed
+
+gems:
+  - jekyll-sitemap
+  - jekyll-feed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
