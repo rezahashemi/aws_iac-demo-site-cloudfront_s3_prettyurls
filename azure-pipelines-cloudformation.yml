@@ -1,5 +1,5 @@
 ##-------------------------------------------------------------------------------------------------
-# purpose: AWS IaC - Site - Demo - CloudFront / S3 / Pretty URLs (CloudFormation)
+# purpose: AWS IaC - Site - Demo - CloudFront S3 Pretty URLs (CloudFormation)
 ##-------------------------------------------------------------------------------------------------
 name: $(Date:yyyy.MM.dd)$(Rev:.r)
 
