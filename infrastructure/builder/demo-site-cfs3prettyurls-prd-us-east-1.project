@@ -1,18 +1,18 @@
-Name:                                       atc-site-demo-cfs3prettyurls-prd-us-east-1
-Description:                                AutomateTheCloud - Site - Demo - CloudFront S3 Pretty URLs (prd) - us-east-1
-Updated:                                    2019/10/10 21:15:00 EST
+Name:                                       demo-site-cfs3prettyurls-prd-us-east-1
+Description:                                Demo - Site - CloudFront S3 Pretty URLs (prd) - us-east-1
+Updated:                                    2019/10/16 13:40:00 EST
 
 Details:
-  Project:                                  AutomateTheCloud|atc
-  Function:                                 Site - Demo - CloudFront S3 Pretty URLs|site-demo-cfs3prettyurls
-  Organization:                             Shared Services|share|us-east-1|prd
+  Project:                                  Demo|demo
+  Function:                                 Site - CloudFront S3 Pretty URLs|site-cfs3prettyurls
+  Organization:                             Production|prod|us-east-1|prd
   Account:                                  AutomateTheCloud|atc|480685085376
   Owner:                                    David Singer|aws-ops@automatethe.cloud
   DeploymentTimeout:                        120
 
 ##-------------------------------------------------------------------------------------------------
 Parameters:
-  #-- Stack Reference -------------------------------------------------------------------
+  #-- Initialize ------------------------------------------------------------------------
   StackReferenceInitialize:                 account-initialize-us-east-1
 
   #-- SSL Certificate -------------------------------------------------------------------
